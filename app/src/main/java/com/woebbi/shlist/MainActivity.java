@@ -33,6 +33,12 @@ import java.util.ArrayList;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        for(int i = 0;i<=10;i++){
+            Things temp;
+            temp = new Things("abc"+i, i);
+            items.add(temp);
+        }
+
         //Connect Views/IDs with Variables
         mAToolbar = findViewById(R.id.mAToolbar);
         mARecyclerView = findViewById(R.id.mARecyclerView);
@@ -45,10 +51,7 @@ import java.util.ArrayList;
         mARecyclerViewAdapter = new RecyclerAdapter(items);
         mARecyclerView.setAdapter(mARecyclerViewAdapter);
 
-        for(int i = 0;i<=10;i++){
-            Things temp = new Things("abc"+i,i);
-            items.add(temp);
-        }
+
 
         }
                 /*
