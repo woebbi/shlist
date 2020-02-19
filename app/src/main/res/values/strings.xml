@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">shlist</string>
+    <string name="placeholderText">placeholderText</string>
+    <string name="placeholderNumber">0</string>
 </resources>
