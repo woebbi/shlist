@@ -35,8 +35,8 @@ import java.util.ArrayList;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for(int i = 0;i<=10;i++){
-            Things temp = null;
+        for(int i = 0;i<=1;i++){
+            Things temp;
             temp = new Things("abc"+i, i);
             items.add(temp);
         }
@@ -52,7 +52,7 @@ import java.util.ArrayList;
 
         mARecyclerViewAdapter = new RecyclerAdapter(items);
         mARecyclerView.setAdapter(mARecyclerViewAdapter);
-        mARecyclerView.addOnItemTouchListener();
+        //mARecyclerView.addOnItemTouchListener();
 
 
 
@@ -67,14 +67,33 @@ import java.util.ArrayList;
 
      @Override
      public void onClick(View v) {
-         v.getId();
+         switch (v.getId()){
+             case R.id.mAFAB:
+                 Context context = getApplicationContext();
+                 //CharSequence text = (String) v.getId();
+                 int duration = Toast.LENGTH_SHORT;
+
+                 Toast toast = Toast.makeText(context, v.getTooltipText(), duration);
+                 toast.show();
+
+                 /*
+                 Things temp = null;
+                 temp = new Things("buhuhu", 2);
+                 items.add(temp);
+                 mARecyclerView.refreshDrawableState();
+                 */
+                 break;
+             default:
+                 break;
+         }
+       /*  v.getId();
          Context context = getApplicationContext();
          //CharSequence text = (String) v.getId();
          int duration = Toast.LENGTH_SHORT;
 
          Toast toast = Toast.makeText(context, v.getTooltipText(), duration);
          toast.show();
-
+*/
 
      }
 
