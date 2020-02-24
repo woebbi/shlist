@@ -45,8 +45,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.rATextViewName.setText(items.get(position).getName());
-        holder.rATextViewAmount.setText(items.get(position).getAmount());
+        //holder.rATextViewName.setText(items.get(position).getName());
+        //holder.rATextViewAmount.setText(items.get(position).getAmount());
     }
 
     @Override

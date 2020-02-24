@@ -6,11 +6,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 
     private SharedPreferences sp;
 
-    private ArrayList<Things> items;
+    private ArrayList<Things> items = new ArrayList<Things>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ import java.util.ArrayList;
         setContentView(R.layout.activity_main);
 
         for(int i = 0;i<=10;i++){
-            Things temp;
+            Things temp = null;
             temp = new Things("abc"+i, i);
             items.add(temp);
         }
@@ -50,6 +52,7 @@ import java.util.ArrayList;
 
         mARecyclerViewAdapter = new RecyclerAdapter(items);
         mARecyclerView.setAdapter(mARecyclerViewAdapter);
+        mARecyclerView.addOnItemTouchListener();
 
 
 
@@ -64,6 +67,14 @@ import java.util.ArrayList;
 
      @Override
      public void onClick(View v) {
+         v.getId();
+         Context context = getApplicationContext();
+         //CharSequence text = (String) v.getId();
+         int duration = Toast.LENGTH_SHORT;
+
+         Toast toast = Toast.makeText(context, v.getTooltipText(), duration);
+         toast.show();
+
 
      }
 

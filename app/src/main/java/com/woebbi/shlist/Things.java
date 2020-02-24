@@ -1,6 +1,8 @@
 package com.woebbi.shlist;
 
-public class Things {
+import java.io.Serializable;
+
+public class Things implements Serializable {
     private String name;
     private int amount;
 
