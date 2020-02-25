@@ -22,8 +22,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private static final String TAG = "RecyclerAdapter";
     private ArrayList<Things> items;
 
-    //private TextView rATextViewName;
-    //private TextView rATextViewAmount;
 
     public RecyclerAdapter(ArrayList<Things> items) {
         this.items = items;
@@ -77,7 +75,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         //holder.rATextViewName.setText(items.get(position).getName());
         //holder.rATextViewAmount.setText(items.get(position).getAmount());
         Log.d(TAG, "Element " + position + " set.");
@@ -86,12 +84,30 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         // with that element
         holder.getrATextViewName().setText(items.get(position).getName());
         holder.getrATextViewAmount().setText(String.valueOf(items.get(position).getAmount()));
-        /*holder.getrAFABAdd().set
-        holder.getrAFABAdd().setText(items.get(position).toString());
-        holder.getrAFABSub().setText(items.get(position).toString());
-        holder.getrAFABDel().setText(items.get(position).toString());*/
+        holder.getrAFABAdd().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "FABADD clicked.");
+                items.get(position).incAmount();
+                holder.getrATextViewAmount().setText(String.valueOf(items.get(position).getAmount()));
+            }
+        });
 
+        holder.getrAFABSub().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "FABSub clicked.");
+                items.get(position).decAmount();
+                holder.getrATextViewAmount().setText(String.valueOf(items.get(position).getAmount()));
+            }
+        });
 
+        holder.getrAFABDel().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "FABADel clicked.");
+            }
+        });
 
     }
 

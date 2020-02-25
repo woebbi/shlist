@@ -26,4 +26,12 @@ public class Things implements Serializable {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    public void incAmount() {
+        this.amount = amount + 1;
+    }
+
+    public void decAmount() {
+        this.amount = amount - 1;
+    }
 }
