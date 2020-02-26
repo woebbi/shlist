@@ -56,7 +56,7 @@ import java.util.ArrayList;
         mARecyclerViewLayoutManager = new LinearLayoutManager(this);
         mARecyclerView.setLayoutManager(mARecyclerViewLayoutManager);
 
-        mARecyclerViewAdapter = new RecyclerAdapter(items);
+        mARecyclerViewAdapter = new RecyclerAdapter(items, mARecyclerView);
         mARecyclerView.setAdapter(mARecyclerViewAdapter);
         //mARecyclerView.addOnItemTouchListener();
 
