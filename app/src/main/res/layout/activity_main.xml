@@ -30,6 +30,21 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <EditText
+        android:id="@+id/mAEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorPinkToolbar"
+        android:hint="DILDO"
+        android:maxLines="1"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mAFAB"
+        app:layout_constraintStart_toStartOf="@+id/mARecyclerView" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/mAFAB"
         android:layout_width="wrap_content"

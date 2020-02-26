@@ -10,8 +10,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +24,8 @@ import java.util.Random;
 
  public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener  {
     private Toolbar mAToolbar;
-    private FloatingActionButton mAFAB;
+     private FloatingActionButton mAFAB;
+     private EditText mAEditText;
 
     private RecyclerView mARecyclerView;
     private RecyclerView.Adapter mARecyclerViewAdapter;
@@ -39,9 +42,9 @@ import java.util.Random;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for(int i = 0;i<=1;i++){
+        for (int i = 0; i <= 1; i++) {
             Things temp;
-            temp = new Things("abc"+i, i);
+            temp = new Things("abc" + i, i);
             items.add(temp);
         }
 
@@ -49,6 +52,10 @@ import java.util.Random;
         mAToolbar = findViewById(R.id.mAToolbar);
         mARecyclerView = findViewById(R.id.mARecyclerView);
         mAFAB = findViewById(R.id.mAFAB);
+        mAEditText = findViewById(R.id.mAEditText);
+
+        //disable Edit Text
+        mAEditText.setEnabled(false);
 
         //Onclickistener
         mAFAB.setOnClickListener(this);
@@ -63,22 +70,21 @@ import java.util.Random;
 
      @Override
      public void onClick(View v) {
+         Log.d(TAG, mAEditText.isEnabled() + " ");
          switch (v.getId()) {
              case R.id.mAFAB:
-                 Context context = getApplicationContext();
-                 //CharSequence text = (String) v.getId();
-                 int duration = Toast.LENGTH_SHORT;
-
-
-                 Log.d(TAG, "FABPED.");
-                 Things temp = null;
-                 Random rand = new Random();
-                 rand.nextInt(20);
-                 temp = new Things("buhuhu", rand.nextInt(20));
-                 items.add(temp);
-                 mARecyclerView.refreshDrawableState();
-                 Toast toast = Toast.makeText(context, String.valueOf(items.size()), duration);
-                 toast.show();
+                 if (mAEditText.isEnabled()) {
+                     Log.d(TAG, "FABPED.");
+                     Things temp = null;
+                     temp = new Things(mAEditText.getText().toString(), 0);
+                     items.add(temp);
+                     mAEditText.setEnabled(false);
+                     mAEditText.setText("");
+                     mAEditText.clearFocus();
+                     mAEditText.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER);
+                 } else {
+                     mAEditText.setEnabled(true);
+                 }
              default:
                  mARecyclerViewAdapter.notifyDataSetChanged();
                  break;
