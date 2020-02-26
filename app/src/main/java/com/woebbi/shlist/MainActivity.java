@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Random;
 
  public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener  {
     private Toolbar mAToolbar;
@@ -58,44 +59,30 @@ import java.util.ArrayList;
 
         mARecyclerViewAdapter = new RecyclerAdapter(items, mARecyclerView);
         mARecyclerView.setAdapter(mARecyclerViewAdapter);
-        //mARecyclerView.addOnItemTouchListener();
-
-
-
         }
 
      @Override
      public void onClick(View v) {
-         switch (v.getId()){
+         switch (v.getId()) {
              case R.id.mAFAB:
                  Context context = getApplicationContext();
                  //CharSequence text = (String) v.getId();
                  int duration = Toast.LENGTH_SHORT;
 
 
-                 Log.d(TAG, "FAPPED.");
-
+                 Log.d(TAG, "FABPED.");
                  Things temp = null;
-                 temp = new Things("buhuhu", 2);
+                 Random rand = new Random();
+                 rand.nextInt(20);
+                 temp = new Things("buhuhu", rand.nextInt(20));
                  items.add(temp);
                  mARecyclerView.refreshDrawableState();
                  Toast toast = Toast.makeText(context, String.valueOf(items.size()), duration);
                  toast.show();
-         //        mARecyclerViewAdapter.notifyDataSetChanged();
-//                 break;
              default:
                  mARecyclerViewAdapter.notifyDataSetChanged();
                  break;
          }
-       /*  v.getId();
-         Context context = getApplicationContext();
-         //CharSequence text = (String) v.getId();
-         int duration = Toast.LENGTH_SHORT;
-
-         Toast toast = Toast.makeText(context, v.getTooltipText(), duration);
-         toast.show();
-*/
-
      }
 
      @Override

@@ -32,21 +32,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, parent, false);
-
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, parent, false);
-
         MyViewHolder viewHolder = new MyViewHolder(v);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-
         Log.d(TAG, "Element " + position + " set.");
-
+        //SET Content
         holder.getrATextViewName().setText(items.get(position).getName());
         holder.getrATextViewAmount().setText(String.valueOf(items.get(position).getAmount()));
+
+        //Each FAB Gets a CLICK
         holder.getrAFABAdd().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,9 +67,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "FABADel clicked.");
-                recView.getAdapter().notifyDataSetChanged();
+                recView.getAdapter().notifyDataSetChanged(); //This refresehes the RECYCVIEW!
                 items.remove(position);
-
             }
         });
 
@@ -82,7 +79,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         private TextView rATextViewName, rATextViewAmount; //the Text
         private FloatingActionButton rAFABAdd, rAFABSub, rAFABDel; //the Buttons
 
-
         public MyViewHolder(View v) {
             super(v);
             //Connect views(cast) with variables
@@ -91,10 +87,30 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             rAFABAdd = (FloatingActionButton) v.findViewById(R.id.rVIFABAdd);
             rAFABSub = (FloatingActionButton) v.findViewById(R.id.rVIFABSub);
             rAFABDel = (FloatingActionButton) v.findViewById(R.id.rVIFABDelete);
+            //Just some debug thing!
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
+                    Log.d(TAG, "Add:" + rAFABAdd.getWidth() + "x" + rAFABAdd.getHeight() + "Sub:" + rAFABSub.getWidth() + "x" + rAFABSub.getHeight() + "Del:" + rAFABDel.getWidth() + "x" + rAFABDel.getHeight());
+                    if (rAFABAdd.isOrWillBeHidden()) {
+                        Log.d(TAG, "Show");
+                        /*
+                        rAFABAdd.show();
+                        rAFABDel.show();
+                        rAFABSub.show();*/
+                        rAFABAdd.setVisibility(View.VISIBLE);
+                        rAFABSub.setVisibility(View.VISIBLE);
+                        rAFABDel.setVisibility(View.VISIBLE);
+                    } else {
+                        Log.d(TAG, "Hide");
+                        rAFABAdd.setVisibility(View.INVISIBLE);
+                        rAFABSub.setVisibility(View.INVISIBLE);
+                        rAFABDel.setVisibility(View.INVISIBLE);
+                                /*
+                        rAFABAdd.hide();
+                        rAFABDel.hide();
+                        rAFABSub.hide();*/
+                    }
                 }
             });
         }
