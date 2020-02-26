@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ import java.util.ArrayList;
 
     private ArrayList<Things> items = new ArrayList<Things>();
 
+     private static final String TAG = "RecyclerAdapter";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,9 @@ import java.util.ArrayList;
         mARecyclerView = findViewById(R.id.mARecyclerView);
         mAFAB = findViewById(R.id.mAFAB);
 
+        //Onclickistener
+        mAFAB.setOnClickListener(this);
+
         //RecyclerVie layout und adapter
         mARecyclerViewLayoutManager = new LinearLayoutManager(this);
         mARecyclerView.setLayoutManager(mARecyclerViewLayoutManager);
@@ -57,13 +63,6 @@ import java.util.ArrayList;
 
 
         }
-                /*
-        mAAdapter = new RecyclerAdapter(getResources().getStringArray(R.array.menuMenu));
-        mARecyclerView.setAdapter(mAAdapter);
-
-                 */
-
-
 
      @Override
      public void onClick(View v) {
@@ -73,17 +72,19 @@ import java.util.ArrayList;
                  //CharSequence text = (String) v.getId();
                  int duration = Toast.LENGTH_SHORT;
 
-                 Toast toast = Toast.makeText(context, v.getTooltipText(), duration);
-                 toast.show();
 
-                 /*
+                 Log.d(TAG, "FAPPED.");
+
                  Things temp = null;
                  temp = new Things("buhuhu", 2);
                  items.add(temp);
                  mARecyclerView.refreshDrawableState();
-                 */
-                 break;
+                 Toast toast = Toast.makeText(context, String.valueOf(items.size()), duration);
+                 toast.show();
+         //        mARecyclerViewAdapter.notifyDataSetChanged();
+//                 break;
              default:
+                 mARecyclerViewAdapter.notifyDataSetChanged();
                  break;
          }
        /*  v.getId();
@@ -99,6 +100,6 @@ import java.util.ArrayList;
 
      @Override
      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+         mARecyclerViewAdapter.notifyDataSetChanged();
      }
  }

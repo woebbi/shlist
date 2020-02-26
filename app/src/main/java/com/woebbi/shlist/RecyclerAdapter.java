@@ -76,12 +76,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        //holder.rATextViewName.setText(items.get(position).getName());
-        //holder.rATextViewAmount.setText(items.get(position).getAmount());
+
         Log.d(TAG, "Element " + position + " set.");
 
-        // Get element from your dataset at this position and replace the contents of the view
-        // with that element
         holder.getrATextViewName().setText(items.get(position).getName());
         holder.getrATextViewAmount().setText(String.valueOf(items.get(position).getAmount()));
         holder.getrAFABAdd().setOnClickListener(new View.OnClickListener() {
@@ -106,6 +103,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "FABADel clicked.");
+
+                items.remove(position);
+
             }
         });
 
