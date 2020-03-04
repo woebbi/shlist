@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -56,6 +57,7 @@ import java.util.Random;
 
         //disable Edit Text
         mAEditText.setEnabled(false);
+        mAEditText.setVisibility(View.INVISIBLE);
 
         //Onclickistener
         mAFAB.setOnClickListener(this);
@@ -82,8 +84,15 @@ import java.util.Random;
                      mAEditText.setText("");
                      mAEditText.clearFocus();
                      mAEditText.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER);
+                     mAEditText.setVisibility(View.INVISIBLE);
                  } else {
+                     mAEditText.setFocusableInTouchMode(true);
                      mAEditText.setEnabled(true);
+                     mAEditText.setVisibility(View.VISIBLE);
+                     mAEditText.requestFocus();
+                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                     imm.showSoftInput(mAEditText, InputMethodManager.SHOW_FORCED);
+
                  }
              default:
                  mARecyclerViewAdapter.notifyDataSetChanged();
