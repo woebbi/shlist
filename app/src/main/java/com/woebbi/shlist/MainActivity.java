@@ -83,8 +83,9 @@ import java.util.Random;
                      mAEditText.setEnabled(false);
                      mAEditText.setText("");
                      mAEditText.clearFocus();
-                     mAEditText.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER);
+
                      mAEditText.setVisibility(View.INVISIBLE);
+                     mARecyclerViewAdapter.notifyDataSetChanged();
                  } else {
                      mAEditText.setFocusableInTouchMode(true);
                      mAEditText.setEnabled(true);
@@ -92,16 +93,18 @@ import java.util.Random;
                      mAEditText.requestFocus();
                      InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                      imm.showSoftInput(mAEditText, InputMethodManager.SHOW_FORCED);
+                     mAEditText.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER);
 
                  }
+                 break;
              default:
-                 mARecyclerViewAdapter.notifyDataSetChanged();
+                 Log.d(TAG, mAEditText.isEnabled() + " ");
                  break;
          }
      }
 
      @Override
      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-         mARecyclerViewAdapter.notifyDataSetChanged();
+         //mARecyclerViewAdapter.notifyDataSetChanged();
      }
  }

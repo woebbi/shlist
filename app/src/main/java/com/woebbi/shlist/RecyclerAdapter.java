@@ -94,10 +94,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                     Log.d(TAG, "Add:" + rAFABAdd.getWidth() + "x" + rAFABAdd.getHeight() + "Sub:" + rAFABSub.getWidth() + "x" + rAFABSub.getHeight() + "Del:" + rAFABDel.getWidth() + "x" + rAFABDel.getHeight());
                     if (rAFABAdd.isOrWillBeHidden()) {
                         Log.d(TAG, "Show");
-                        /*
-                        rAFABAdd.show();
-                        rAFABDel.show();
-                        rAFABSub.show();*/
                         rAFABAdd.setVisibility(View.VISIBLE);
                         rAFABSub.setVisibility(View.VISIBLE);
                         rAFABDel.setVisibility(View.VISIBLE);
@@ -106,10 +102,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         rAFABAdd.setVisibility(View.INVISIBLE);
                         rAFABSub.setVisibility(View.INVISIBLE);
                         rAFABDel.setVisibility(View.INVISIBLE);
-                                /*
-                        rAFABAdd.hide();
-                        rAFABDel.hide();
-                        rAFABSub.hide();*/
                     }
                 }
             });
