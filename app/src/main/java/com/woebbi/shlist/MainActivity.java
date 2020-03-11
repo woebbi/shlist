@@ -2,7 +2,6 @@
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,31 +11,31 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Random;
 
- public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener  {
-    private Toolbar mAToolbar;
+ public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+     private Toolbar mAToolbar;
      private FloatingActionButton mAFAB;
      private EditText mAEditText;
 
-    private RecyclerView mARecyclerView;
-    private RecyclerView.Adapter mARecyclerViewAdapter;
-    private RecyclerView.LayoutManager mARecyclerViewLayoutManager;
+     private RecyclerView mARecyclerView;
+     private RecyclerView.Adapter mARecyclerViewAdapter;
+     private RecyclerView.LayoutManager mARecyclerViewLayoutManager;
 
-    private SharedPreferences sp;
+     private SharedPreferences sp;
 
     private ArrayList<Things> items = new ArrayList<Things>();
 
      private static final String TAG = "RecyclerAdapter";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +52,34 @@ import java.util.Random;
         mAToolbar = findViewById(R.id.mAToolbar);
         mARecyclerView = findViewById(R.id.mARecyclerView);
         mAFAB = findViewById(R.id.mAFAB);
+
         mAEditText = findViewById(R.id.mAEditText);
+        mAEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                Log.d(TAG, "drinne.");
+                if (actionId == EditorInfo.IME_ACTION_GO) {
+                    Log.d(TAG, "FABPED.");
+                    Things temp = null;
+                    temp = new Things(mAEditText.getText().toString(), 0);
+                    items.add(temp);
+                    mAEditText.setEnabled(false);
+                    mAEditText.setText("");
+                    mAEditText.clearFocus();
+
+                    mAEditText.setVisibility(View.INVISIBLE);
+                    mARecyclerViewAdapter.notifyDataSetChanged();
+                }
+                return handled;
+
+            }
+        });
 
         //disable Edit Text
         mAEditText.setEnabled(false);
         mAEditText.setVisibility(View.INVISIBLE);
+
 
         //Onclickistener
         mAFAB.setOnClickListener(this);
@@ -93,8 +115,6 @@ import java.util.Random;
                      mAEditText.requestFocus();
                      InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                      imm.showSoftInput(mAEditText, InputMethodManager.SHOW_FORCED);
-                     mAEditText.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER);
-
                  }
                  break;
              default:
@@ -107,4 +127,6 @@ import java.util.Random;
      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
          //mARecyclerViewAdapter.notifyDataSetChanged();
      }
+
+
  }
