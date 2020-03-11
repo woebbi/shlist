@@ -37,13 +37,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:background="@color/colorPinkToolbar"
-        android:hint="DILDO"
-        android:maxLines="1"
         android:imeOptions="actionGo"
-
         android:minHeight="48dp"
         android:textAlignment="center"
-        android:singleLine="true"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/mAFAB"
         app:layout_constraintStart_toStartOf="@+id/mARecyclerView" />

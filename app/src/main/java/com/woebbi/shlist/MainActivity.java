@@ -54,12 +54,13 @@ import java.util.ArrayList;
         mAFAB = findViewById(R.id.mAFAB);
 
         mAEditText = findViewById(R.id.mAEditText);
+        //CHeck if enter key on softkeyboard was pressen and if then add text and do it
         mAEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 Log.d(TAG, "drinne.");
-                if (actionId == EditorInfo.IME_ACTION_GO) {
+                if (actionId == EditorInfo.IME_ACTION_GO || event.getKeyCode() == KeyEvent.KEYCODE_NUMPAD_ENTER || event.getKeyCode() == KeyEvent.KEYCODE_ENTER || event.getKeyCode() == KeyEvent.KEYCODE_SEARCH) {
                     Log.d(TAG, "FABPED.");
                     Things temp = null;
                     temp = new Things(mAEditText.getText().toString(), 0);
@@ -67,9 +68,9 @@ import java.util.ArrayList;
                     mAEditText.setEnabled(false);
                     mAEditText.setText("");
                     mAEditText.clearFocus();
-
                     mAEditText.setVisibility(View.INVISIBLE);
                     mARecyclerViewAdapter.notifyDataSetChanged();
+                    handled = true;
                 }
                 return handled;
 
