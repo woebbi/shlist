@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +43,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         Log.d(TAG, "Element " + position + " set.");
         //SET Content
         holder.getrATextViewName().setText(items.get(position).getName());
+        holder.getrAEditTextName().setText(items.get(position).getName());
         holder.getrATextViewAmount().setText(String.valueOf(items.get(position).getAmount()));
+
 
         //Each FAB Gets a CLICK
         holder.getrAFABAdd().setOnClickListener(new View.OnClickListener() {
@@ -67,8 +70,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "FABADel clicked.");
-                recView.getAdapter().notifyDataSetChanged(); //This refresehes the RECYCVIEW!
                 items.remove(position);
+                recView.getAdapter().notifyDataSetChanged(); //This refresehes the RECYCVIEW!
+
+            }
+        });
+
+        holder.getrAEditTextName().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "FABADel clicked.");
+                items.get(position).setName(holder.getrAEditTextName().getText().toString());
+                //holder.getrATextViewName().setText(holder.getrAEditTextName().getText());
+
+
+                recView.getAdapter().notifyDataSetChanged(); //This refresehes the RECYCVIEW!
+
             }
         });
 
@@ -78,6 +95,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         // each data item is just a string in this case
         private TextView rATextViewName, rATextViewAmount; //the Text
         private FloatingActionButton rAFABAdd, rAFABSub, rAFABDel; //the Buttons
+        private EditText rAEditTextName;
 
         public MyViewHolder(View v) {
             super(v);
@@ -87,6 +105,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             rAFABAdd = (FloatingActionButton) v.findViewById(R.id.rVIFABAdd);
             rAFABSub = (FloatingActionButton) v.findViewById(R.id.rVIFABSub);
             rAFABDel = (FloatingActionButton) v.findViewById(R.id.rVIFABDelete);
+            rAEditTextName = (EditText) v.findViewById(R.id.rVIEditTextName);
             //Just some debug thing!
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,11 +116,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         rAFABAdd.setVisibility(View.VISIBLE);
                         rAFABSub.setVisibility(View.VISIBLE);
                         rAFABDel.setVisibility(View.VISIBLE);
+                        rAEditTextName.setVisibility(View.VISIBLE);
+                        rATextViewName.setVisibility(View.INVISIBLE);
+
                     } else {
                         Log.d(TAG, "Hide");
                         rAFABAdd.setVisibility(View.INVISIBLE);
                         rAFABSub.setVisibility(View.INVISIBLE);
                         rAFABDel.setVisibility(View.INVISIBLE);
+                        rAEditTextName.setVisibility(View.INVISIBLE);
+                        rATextViewName.setVisibility(View.VISIBLE);
+
                     }
                 }
             });
@@ -126,6 +151,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         public TextView getrATextViewAmount() {
             return rATextViewAmount;
+        }
+
+        public TextView getrAEditTextName() {
+            return rAEditTextName;
         }
     }
 

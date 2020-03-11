@@ -16,6 +16,19 @@
         app:layout_constraintStart_toEndOf="@+id/rVIFABDelete"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/rVIEditTextName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:text="@string/placeholderText"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rVIFABAdd"
+        app:layout_constraintStart_toEndOf="@+id/rVIFABDelete"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/rVIFABDelete"
         android:layout_width="wrap_content"
